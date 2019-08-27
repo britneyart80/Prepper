@@ -19,6 +19,7 @@ import CreateRecipe from '../Recipes/CreateRecipe'
 // Week imports
 import Weeks from '../Weeks/Weeks'
 import Week from '../Weeks/Week'
+import Weekday from '../Weeks/Weekday'
 
 class App extends Component {
   constructor () {
@@ -83,10 +84,13 @@ class App extends Component {
 
           {/* Week Routes */}
           <AuthenticatedRoute user={user} exact path='/weeks' render={() => (
-            <Weeks user={user}/>
+            <Weeks alert={this.alert} user={user}/>
           )} />
           <AuthenticatedRoute user={user} exact path='/weeks/:id' render={() => (
-            <Week user={user}/>
+            <Week user={user} alert={this.alert}/>
+          )} />
+          <AuthenticatedRoute user={user} exact path='/weeks/:id/:index' render={() => (
+            <Weekday user={user}/>
           )} />
         </main>
       </Fragment>
