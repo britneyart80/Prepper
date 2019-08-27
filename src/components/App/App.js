@@ -16,6 +16,10 @@ import Recipe from '../Recipes/Recipe'
 import EditRecipe from '../Recipes/EditRecipe'
 import CreateRecipe from '../Recipes/CreateRecipe'
 
+// Week imports
+import Weeks from '../Weeks/Weeks'
+import Week from '../Weeks/Week'
+
 class App extends Component {
   constructor () {
     super()
@@ -76,6 +80,14 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/create-recipe' render={() => (
             <CreateRecipe user={user} alert={this.alert}/>
           )}/>
+
+          {/* Week Routes */}
+          <AuthenticatedRoute user={user} exact path='/weeks' render={() => (
+            <Weeks user={user}/>
+          )} />
+          <AuthenticatedRoute user={user} exact path='/weeks/:id' render={() => (
+            <Week user={user}/>
+          )} />
         </main>
       </Fragment>
     )

@@ -15,7 +15,6 @@ class Recipe extends Component {
   }
 
   async componentDidMount () {
-    console.log('i got here')
     try {
       const res = await axios(`${apiUrl}/recipes/${this.props.match.params.id}`)
       this.setState({ recipe: res.data.recipe })
