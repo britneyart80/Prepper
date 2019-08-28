@@ -73,7 +73,7 @@ class Week extends Component {
         console.log(res)
         this.props.alert({
           heading: 'Success!',
-          message: 'You edited your week!',
+          message: 'You renamed your plan.',
           variant: 'success'
         })
         this.setState({ editing: false })

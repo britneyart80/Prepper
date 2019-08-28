@@ -21,6 +21,8 @@ import Weeks from '../Weeks/Weeks'
 import Week from '../Weeks/Week'
 import Weekday from '../Weeks/Weekday'
 
+import Cart from '../Carts/Cart'
+
 class App extends Component {
   constructor () {
     super()
@@ -71,9 +73,11 @@ class App extends Component {
           )} />
 
           {/* Recipe Routes */}
-          <AuthenticatedRoute user={user} exact path='/recipes' render={ Recipes }/>
+          <AuthenticatedRoute user={user} exact path='/recipes' render={() => (
+            <Recipes user={user} alert={this.alert}/>
+          )}/>
           <AuthenticatedRoute user={user} exact path='/recipes/:id' render={() => (
-            <Recipe user={user}/>
+            <Recipe user={user} alert={this.alert}/>
           )}/>
           <AuthenticatedRoute user={user} path='/recipes/:id/edit' render={() => (
             <EditRecipe user={user} alert={this.alert}/>
@@ -90,7 +94,12 @@ class App extends Component {
             <Week user={user} alert={this.alert}/>
           )} />
           <AuthenticatedRoute user={user} exact path='/weeks/:id/:index' render={() => (
-            <Weekday user={user}/>
+            <Weekday user={user} alert={this.alert}/>
+          )} />
+
+          {/* Cart Routes */}
+          <AuthenticatedRoute user={user} exact path='/cart' render={() => (
+            <Cart user={user} alert={this.alert}/>
           )} />
         </main>
       </Fragment>

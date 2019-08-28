@@ -4,20 +4,24 @@ import axios from 'axios'
 import apiUrl from './../../apiConfig'
 import Spinner from 'react-bootstrap/Spinner'
 import Button from 'react-bootstrap/Button'
+import IngredientForm from './../Ingredients/IngredientForm'
 
 class Recipe extends Component {
   constructor () {
     super()
 
     this.state = {
-      recipe: null
+      recipe: null,
+      adding: false,
+      ingredients: null
     }
   }
 
   async componentDidMount () {
     try {
       const res = await axios(`${apiUrl}/recipes/${this.props.match.params.id}`)
-      this.setState({ recipe: res.data.recipe })
+      this.setState({ recipe: res.data.recipe, ingredients: res.data.recipe.ingredients })
+      console.log(res.data.recipe)
     } catch (error) {
       console.error(error)
     }
@@ -39,19 +43,95 @@ class Recipe extends Component {
       ))
   }
 
+  addIngredient = () => {
+    this.setState({ adding: true })
+  }
+
+  // for adding an ingredient
+  handleSubmit = event => {
+    event.preventDefault()
+    const data = new FormData(event.target)
+    const dataName = data.get('name')
+    const dataUnit = data.get('unit')
+    const dataAmount = data.get('amount')
+    data.set('owner', this.props.user._id)
+    data.set('recipe', this.state.recipe._id)
+    axios({
+      method: 'POST',
+      url: `${apiUrl}/ingredients`,
+      headers: {
+        'Authorization': `Bearer ${this.props.user.token}`
+      },
+      data: {
+        ingredient: {
+          name: dataName,
+          unit: dataUnit,
+          amount: dataAmount,
+          owner: this.props.user._id,
+          recipe: this.state.recipe._id
+        }
+      }
+    })
+      .then(res => {
+        console.log(res)
+        const updated = this.state.recipe.ingredients
+        updated.push(res.data.ingredient)
+        this.props.alert({
+          heading: 'Success!',
+          message: 'You added an ingredient',
+          variant: 'success'
+        })
+        this.setState({ adding: false, ingredients: updated })
+        console.log(this.state.recipe)
+      })
+      .catch(console.error)
+  }
+
+  deleteIngredient= (event) => {
+    event.preventDefault()
+    console.log(event.target.id)
+    const updated = this.state.ingredients.filter(ingredient => ingredient._id !== event.target.id)
+    console.log(updated)
+    axios({
+      method: 'DELETE',
+      url: `${apiUrl}/ingredients/${event.target.id}`,
+      headers: {
+        'Authorization': `Bearer ${this.props.user.token}`
+      }
+    })
+      .then(this.setState({ ingredients: updated }))
+  }
+
   render () {
-    const { recipe } = this.state
+    const { recipe, adding, ingredients } = this.state
 
     if (recipe) {
+      const ingredientForm = <IngredientForm
+        handleSubmit={this.handleSubmit}
+      />
       const buttonJsx = (
         <React.Fragment>
           <Button href={`#recipes/${recipe._id}/edit`} user={this.props.user}>Edit Recipe</Button>
           <Button onClick={this.deleteRecipe}>Delete Recipe</Button>
+          <Button onClick={this.addIngredient}>Add Ingredient</Button>
         </React.Fragment>
       )
+      const listItems = ingredients.map(ingredient => (
+        <React.Fragment key={ingredient._id}>
+          <li> {`${ingredient.name}, ${ingredient.amount} ${ingredient.amount > 1 ? ingredient.unit + 's' : ingredient.unit}`}
+            <Button onClick={this.deleteIngredient} id={ingredient._id}>X</Button>
+          </li>
+        </React.Fragment>
+      ))
+      console.log(recipe.ingredients)
       return (
         <div>
           <h2> {recipe.name} </h2>
+          <h3> Ingredients: </h3>
+          <ul>
+            { listItems }
+          </ul>
+          {adding ? ingredientForm : ''}
           <h4> {recipe.description} </h4>
           {this.props.user && recipe && this.props.user._id === recipe.owner ? buttonJsx : ''}
           <Button href={'#recipes'}>Return to Recipes</Button>

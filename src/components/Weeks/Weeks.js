@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from './../../apiConfig'
-import Spinner from 'react-bootstrap/Spinner'
 import Button from 'react-bootstrap/Button'
 import ListGroup from 'react-bootstrap/ListGroup'
 import moment from 'moment'
@@ -51,17 +50,18 @@ class Weeks extends Component {
 
   render () {
     const { weeks } = this.state
+    const buttonJsx = (
+      <React.Fragment>
+        <Button onClick={this.createPlan} user={this.props.user}>Create a Plan</Button>
+      </React.Fragment>
+    )
     if (weeks.length) {
-      const buttonJsx = (
-        <React.Fragment>
-          <Button onClick={this.createPlan} user={this.props.user}>Create a Plan</Button>
-        </React.Fragment>
-      )
-      const plans = weeks.slice(0).reverse().filter(week => week.owner === this.props.user._id).map(week => (
+      const myPlans = weeks.slice(0).reverse().filter(week => week.owner === this.props.user._id)
+      const plans = myPlans.length ? myPlans.map(week => (
         <ListGroup.Item key={week._id} as="a" action variant="light" href={`#weeks/${week._id}`}>
           {week.name}
         </ListGroup.Item>
-      ))
+      )) : <p> You have no plans! </p>
       return (
         <React.Fragment>
           {buttonJsx}
@@ -71,7 +71,10 @@ class Weeks extends Component {
       )
     }
     return (
-      <Spinner animation="border" />
+      <React.Fragment>
+        { buttonJsx }
+        <p> You have no plans yet! </p>
+      </React.Fragment>
     )
   }
 }

@@ -47,9 +47,8 @@ class EditRecipe extends Component {
           message: 'You edited your recipe!',
           variant: 'success'
         })
-        this.props.history.push(`/recipes/${this.state.recipe._id}`
-        )
       })
+      .then(this.props.history.push(`/recipes/${this.state.recipe._id}`))
       .catch(console.error)
   }
 

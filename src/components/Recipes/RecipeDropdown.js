@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from './../../apiConfig'
 import Dropdown from 'react-bootstrap/Dropdown'
-import Spinner from 'react-bootstrap/Spinner'
 
 class RecipeDropdown extends Component {
   constructor () {
@@ -23,10 +22,6 @@ class RecipeDropdown extends Component {
     }
   }
 
-  addRecipe = () => {
-    console.log('added')
-  }
-
   render () {
     const recipes = this.state.recipes
     if (recipes.length) {
@@ -43,7 +38,12 @@ class RecipeDropdown extends Component {
       )
     }
     return (
-      <Spinner animation="border" />
+      <Dropdown>
+        <Dropdown.Toggle variant='dark' id='dropdown-basic'>Add Recipes</Dropdown.Toggle>
+        <Dropdown.Menu>
+          <Dropdown.Item >No Recipes yet</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
     )
   }
 }

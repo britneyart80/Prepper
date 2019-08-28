@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from './../../apiConfig'
-import Spinner from 'react-bootstrap/Spinner'
 import Button from 'react-bootstrap/Button'
 import ListGroup from 'react-bootstrap/ListGroup'
 
@@ -26,26 +25,31 @@ class Recipes extends Component {
 
   render () {
     const recipes = this.state.recipes
+    const buttonJsx = (
+      <React.Fragment>
+        <Button href='#create-recipe' user={this.props.user}>Create a Recipe</Button>
+      </React.Fragment>
+    )
     if (recipes.length) {
-      const buttonJsx = (
-        <React.Fragment>
-          <Button href='#create-recipe' user={this.props.user}>Create a Recipe</Button>
-        </React.Fragment>
-      )
-      const listRecipes = recipes.map(recipe => (
+      const myRecipes = recipes.filter(week => week.owner === this.props.user._id)
+      const listRecipes = myRecipes.length ? myRecipes.map(recipe => (
         <ListGroup.Item key={recipe._id} as="a" action variant="light" href={`#recipes/${recipe._id}`}>
           {recipe.name}
         </ListGroup.Item>
-      ))
+      )) : <p> You have no recipes! </p>
       return (
         <React.Fragment>
           { buttonJsx }
+          <h1>Your Recipes</h1>
           { listRecipes }
         </React.Fragment>
       )
     }
     return (
-      <Spinner animation="border" />
+      <React.Fragment>
+        { buttonJsx }
+        <p> You have no plans yet! </p>
+      </React.Fragment>
     )
   }
 }

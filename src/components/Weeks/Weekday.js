@@ -42,7 +42,50 @@ class Weekday extends Component {
   }
 
   addRecipe = (event) => {
-    console.log(event)
+    event.preventDefault()
+    const updated = this.state.weekday
+    updated.push(event.target.id)
+    axios({
+      method: 'PATCH',
+      url: `${apiUrl}/weeks/${this.props.match.params.id}`,
+      headers: {
+        'Authorization': `Bearer ${this.props.user.token}`
+      },
+      data: {
+        week: {
+          [this.props.match.params.index]: updated
+        }
+      }
+    })
+      .then(res => {
+        console.log(res)
+        this.props.alert({
+          heading: 'Success!',
+          message: 'You added a Recipe!',
+          variant: 'success'
+        })
+        this.setState({ editing: false })
+      })
+      .catch(console.error)
+  }
+
+  onDeleteRecipe = (event) => {
+    event.preventDefault()
+    console.log(event.target.id)
+    const updated = this.state.weekday.filter(id => id !== event.target.id)
+    this.setState({ weekday: updated })
+    axios({
+      method: 'PATCH',
+      url: `${apiUrl}/weeks/${this.props.match.params.id}`,
+      headers: {
+        'Authorization': `Bearer ${this.props.user.token}`
+      },
+      data: {
+        week: {
+          [this.props.match.params.index]: updated
+        }
+      }
+    })
   }
 
   render () {
@@ -58,7 +101,7 @@ class Weekday extends Component {
           addRecipe={this.addRecipe}/>
       )
       const recipes = weekday.map(recipeId => (
-        <WeekdayRecipe key={recipeId} id={recipeId}/>
+        <WeekdayRecipe user={this.props.user} key={recipeId} id={recipeId} onDeleteRecipe={this.onDeleteRecipe}/>
       ))
 
       const noRecipes = (
