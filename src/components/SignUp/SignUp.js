@@ -98,6 +98,7 @@ class SignUp extends Component {
               Submit
             </Button>
           </Form>
+          <p>Already have an account? <a href='#sign-in'> Sign In </a> here</p>
         </div>
       </div>
     )

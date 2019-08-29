@@ -1,20 +1,242 @@
 @import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css?family=Roboto|Signika+Negative&display=swap');
+
+$h1size: 3.7rem;
+$basered: rgba(217, 30, 24, 1);
+$lightred: rgba(236, 100, 75, 1);
+$lightgrey: rgba(0, 0, 0, .05);
+$subfont: 'Roboto', sans-serif;
+$basefont: 'Signika Negative', sans-serif;
 
 * {
 }
 
-.navbar {
-  padding: 15px;
+h1 {
+  font-size: $h1size;
+  font-family: $basefont;
+  font-weight: 500;
 }
 
+p {
+  font-family: $subfont;
+  font-size: 1.15rem;
+}
+
+a {
+  color: $lightred;
+  &:hover {
+    color: $basered;
+  }
+}
+
+.navbar {
+  padding: 15px;
+
+  .navbar-brand {
+    color: $basered;
+  }
+  img {
+    max-width: 2rem;
+  }
+}
+
+.btn, .btn-primary {
+  background-color: $lightred;
+  border-color: $basered;
+  width: 150px;
+  padding: .6rem;
+  margin: .5rem;
+  &:hover {
+    background-color: $basered;
+    border-color: $lightred;
+  }
+}
+
+.brand {
+  font-family: $subfont;
+  font-weight: 800;
+  margin: 0;
+}
+
+// HOME PAGE
+
 .head-display {
-  background-image: url("images/header-bg.jpg");
+  background-image: url("images/background-2.jpg");
   background-color: red;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  padding: 20px;
-  height: 600px;
-  color: black;
-  text-shadow: 1px 1px white;
+  text-align: center;
+  padding: 1.5rem;
+  height: 640px;
+  color: white;
+  text-shadow: 0 0 15px black;
+
+  h4 {
+    font-size: 1.4rem;
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  .auth-links {
+    padding: 0 1rem;
+    a {
+      font-weight: 800;
+      color: $lightred;
+    }
+  }
+}
+
+// HOME CONTENTS
+
+.home-content {
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+
+  h2 {
+    font-weight: 600;
+    span {
+    color: $basered;
+  }
+    margin: 1rem;
+  }
+  .how-content {
+    .how-section {
+      margin: 2rem;
+      width: 370px;
+      img {
+        max-width: 150px;
+        margin: 1.3rem;
+      }
+    }
+  }
+
+  .hp-buttons {
+    height: 350px;
+    .btn {
+      margin: 1rem;
+    }
+  }
+
+  .help {
+    h2 {
+      text-align: left;
+    }
+  }
+}
+
+// LOGGED IN HEADER
+
+.in-head {
+  padding-top: 170px;
+  height: 850px;
+  background: linear-gradient(transparent, white), url("images/banner.png"), no-repeat center;
+  background-size: cover;
+  height: 280px;
+  text-align: center;
+  padding: 1.5rem;
+  font-family: $basefont;
+  text-shadow: 0 0 15px white;
+}
+
+.footer {
+  text-align: center;
+  justify-content: flex-end;
+  .credits {
+    padding-right: 1.5rem;
+    color: $lightred;
+    p {
+      font-size: .8rem;
+      color: $lightred;
+    }
+  }
+}
+
+// GENERIC
+
+.page-header {
+  text-align: center;
+  color: white;
+  height: 250px;
+  background-color: $lightred;
+  margin: 0 -15px;
+  border-bottom-left-radius: 15%;
+  border-bottom-right-radius: 15%;
+}
+
+.page-content {
+  padding: 1rem;
+
+  .no-content {
+    margin-top: 1rem;
+  }
+}
+
+// WEEK STYLES
+
+.week-page {
+  h1 {
+    margin: 1rem;
+    align-self: center;
+    text-align: center;
+  }
+
+  .week-content {
+    padding: 1rem;
+
+    .buttonjsx {
+      text-align: center;
+    }
+
+    .weekdays {
+      flex-wrap: wrap;
+      justify-content: space-around;
+
+      a:hover {
+        text-decoration: none;
+      }
+      .weekday {
+        border: 1px solid grey;
+        border-radius: 15px;
+        margin-bottom: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 40vw;
+        width: calc(1300px / 7);
+
+        p, h2 {
+          margin: 0;
+        }
+
+        &:hover {
+          background-color: $lightgrey;
+          transition-duration: .5s;
+        }
+      }
+    }
+  }
+}
+
+.weekly-plans {
+  a {
+    border-radius: 10px;
+  }
+}
+
+.weekday-recipe {
+  .recipe-description {
+    span {
+      font-size: 1rem;
+    }
+  }
+}
+
+// FORM STYLES
+
+.form-title {
+  font-family: $basefont;
+  margin: 1rem;
 }

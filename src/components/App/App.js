@@ -72,8 +72,10 @@ class App extends Component {
             message={alert.message}
           />
         ))}
-        <main className='container'>
-          <Route exact path='/' render={ Home } />
+        <main className='container-fluid'>
+          <Route exact path='/' render={() => (
+            <Home user={user}/>
+          )} />
 
           {/* Auth Routes */}
           <Route exact path='/sign-up' render={() => (

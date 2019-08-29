@@ -66,7 +66,7 @@ class WeekdayRecipe extends Component {
   render () {
     const { recipe, fullDescription } = this.state
     if (recipe) {
-      let desc = (<h4> {(recipe.description).substring(0, 150) + ' ...'} </h4>)
+      let desc = (<h4 className='recipe-description'> {(recipe.description).substring(0, 150)} <span>...(click for more)</span> </h4>)
       if (fullDescription) {
         desc = (
           <React.Fragment>
@@ -80,7 +80,7 @@ class WeekdayRecipe extends Component {
         )
       }
       return (
-        <div>
+        <div className='weekday-recipe'>
           <h3> {recipe.name} </h3>
           <div onClick={this.toggleDescription}>
             { desc }

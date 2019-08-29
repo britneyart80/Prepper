@@ -27,7 +27,7 @@ class EditWeek extends Component {
       return (
         <Form onSubmit={this.props.handleSubmit}>
           <Form.Group controlId="name">
-            <Form.Label>Plan Name</Form.Label>
+            <Form.Label><h3 className='form-title'>Plan Name</h3></Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter a name for your plan"

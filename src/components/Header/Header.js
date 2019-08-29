@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
+import logo from './../../images/red-chili-pepper.png'
 
 const authenticatedOptions = (
   <Fragment>
@@ -26,9 +27,9 @@ const alwaysOptions = (
 )
 
 const Header = ({ user }) => (
-  <Navbar bg="dark" variant="dark" expand="md">
-    <Navbar.Brand href="#">
-      Prepper
+  <Navbar collapseOnSelect bg="light" variant="light" expand="md">
+    <Navbar.Brand href='#'>
+      <h5 className='brand'> Prepper <img src={logo}/> </h5>
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">

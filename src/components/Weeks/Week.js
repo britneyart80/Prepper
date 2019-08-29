@@ -42,6 +42,7 @@ class Week extends Component {
   }
 
   editWeek = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
     this.setState({ editing: true })
   }
 
@@ -90,15 +91,17 @@ class Week extends Component {
     const { week } = this.state
 
     if (week) {
+      const returnBtn = (<Button href='#weeks'>Return to Plans</Button>)
       const buttonJsx = (
-        <React.Fragment>
+        <div className='buttonjsx'>
           <Button onClick={this.editWeek}>Edit Plan Name</Button>
-          <Button onClick={this.deleteWeek}>Delete Weekly Plan</Button>
-        </React.Fragment>
+          <Button onClick={this.deleteWeek}>Delete Plan</Button>
+          {returnBtn}
+        </div>
       )
       const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
       const orderedDays = [week[0], week[1], week[2], week[3], week[4], week[5], week[6]]
-      let title = (<h2>{week.name}</h2>)
+      let title = (<h1>{week.name}</h1>)
       if (this.state.editing) {
         title = <EditWeek
           user={this.props.user}
@@ -106,20 +109,21 @@ class Week extends Component {
           handleSubmit={this.handleSubmit}/>
       }
       return (
-        <div>
+        <div className='week-page'>
           { title }
-          {orderedDays.map((recipes, index) => (
-            <div key={index}>
-              <Link to={`/weeks/${this.state.week._id}/${index}`}>
-                <h2> {days[index]} </h2>
-              </Link>
-              <p>{orderedDays[index].length} meals planned</p>
+          <div className='week-content justify-content-space-between align-items-center'>
+            <div className='weekdays d-flex'>
+              {orderedDays.map((recipes, index) => (
+                <Link key={index} to={`/weeks/${this.state.week._id}/${index}`}>
+                  <div className='weekday'>
+                    <h2> {days[index]} </h2>
+                    <p>{orderedDays[index].length} meals planned</p>
+                  </div>
+                </Link>
+              ))}
             </div>
-          ))}
-          {this.props.user && week && this.props.user._id === week.owner ? buttonJsx : ''}
-          <Link to='/weeks'>
-            <Button>Return to Plans</Button>
-          </Link>
+            {this.props.user && week && this.props.user._id === week.owner ? buttonJsx : returnBtn}
+          </div>
         </div>
       )
     }

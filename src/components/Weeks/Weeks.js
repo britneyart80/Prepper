@@ -62,25 +62,35 @@ class Weeks extends Component {
         <Button onClick={this.createPlan} user={this.props.user}>Create a Plan</Button>
       </React.Fragment>
     )
+    const title = (<div className='page-header d-flex justify-content-center align-items-center'>
+      <h1> Your Weekly Meal Plans </h1>
+    </div>)
     if (weeks.length) {
       const myPlans = weeks.slice(0).reverse().filter(week => week.owner === this.props.user._id)
       const plans = myPlans.length ? myPlans.map(week => (
         <ListGroup.Item key={week._id} as="a" action variant="light" href={`#weeks/${week._id}`}>
           {week.name}
         </ListGroup.Item>
-      )) : <p> You have no plans! </p>
+      )) : <p className='no-content'> You have no plans! </p>
       return (
         <React.Fragment>
-          {buttonJsx}
-          <h1> Your Weekly Meal Plans </h1>
-          {plans}
+          {title}
+          <div className='page-content'>
+            {buttonJsx}
+            <div className='weekly-plans'>
+              {plans}
+            </div>
+          </div>
         </React.Fragment>
       )
     }
     return (
       <React.Fragment>
-        { buttonJsx }
-        <p> You have no plans yet! </p>
+        {title}
+        <div className='page-content'>
+          <p className='no-content'> You have no plans yet! </p>
+          { buttonJsx }
+        </div>
       </React.Fragment>
     )
   }
