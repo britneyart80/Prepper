@@ -69,10 +69,9 @@ main.container-fluid {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-color: red;
   background-repeat: no-repeat;
   background-size: cover;
-  background-attachment: fixed;
+  background-attachment: scroll;
   text-align: center;
   padding: 1.5rem;
   height: 640px;
@@ -91,6 +90,10 @@ main.container-fluid {
       font-weight: 800;
       color: $lightred;
     }
+  }
+
+  @media (max-width: 767px) {
+    background-attachment: initial;
   }
 }
 
