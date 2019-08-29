@@ -1,10 +1,10 @@
-# **Welcome to “Eat Up”!**
+# **Welcome to “Prepper”!**
 
-#### ABOUT EAT UP
-Eat Up (tm) is a scrumptious social site for scheduling your snacking shindigs!!  No more missing out on carnitas because your calendar was too cluttered, no more missing spaghetti due to scheduling snafus - get your designated dining done right with the app that helps you find and manage food related events you'll want to attend!
+#### ABOUT PREPPER
+Preppery is an app that includes all your meal prep needs! Create and save your favorite recipes, make different meal plans to vary your diet, and add saved meals to your plans at the click of a button! But wait, there's more! Ever tired of calculating all the things you need to buy? Fret no more because you can add ingredients from planned meals to your shopping list and Prepper will compile everything you need to buy for you!
 
-#### HOW EAT UP WORKS
-Anyone can browse Eat Up and view food related events, but to really harness the power, sign up and then sign in.  Being a registered user will allow you to create your own events that you'd like to draw the public to.  As a registered user you'll also be able to RSVP to events of interest to you so you don't miss a chance to attend those exciting edible endeavors!
+#### HOW PREPPER WORKS
+Once you create an account, you have access to meal prepping, recipe making and easy shopping list-ing! Create your favorite recipes in the recipes tab and add the necessary ingredients. From there, create a meal plan and add those saved recipes to which ever day of the week you want! For each planned recipe, click to reveal the ingredients, and add what you don't have at home to your shopping cart. Once you tick those things off your shopping list they are removed for you.
 
 #### Links:
 [Deployed Site](https://britneyart80.github.io/capstone-client/#/)
@@ -17,12 +17,9 @@ Anyone can browse Eat Up and view food related events, but to really harness the
 - HTML
 - CSS
 - JAVASCRIPT
-- JQUERY
-- AJAX
+- REACT
+- AXIOS
 - HEROKU
-- HANDLEBARS
-- GITHUB VERSION CONTROL
-- AWS CLOUD HOSTING
 - SCSS
 - EXPRESS
 - MONGOOSE
@@ -30,31 +27,26 @@ Anyone can browse Eat Up and view food related events, but to really harness the
 
 
 #### USER STORIES
--   As an unregistered user, I would like to sign up with email and password.
--   As a registered user, I would like to sign in with email and password.
--   As a signed in user, I would like to change password.
--   As a signed in user, I would like to sign out.
--   As an unregistered user, I would like to see all events.
--   As a signed in user, I would like to RSVP to an event.
--   As a signed in user, I would like to create my own event.
--   As a signed in user, I would like to update my own events.
--   As a signed in user, I would like to delete my own events.
+- As a user I want to be able to create a new weekly plan
+- As a user I want to be able to add recipes to each day of the week
+- As a user I want to be able to add a recipe
+- As a user I want to be able to add ingredients to a recipe
+- As a user I want to be able to delete a weekly plan
+- As a user I want to be able to delete a recipe
+- As a user I want to be able to delete an ingredient from a recipe
+- As a user I want to be able to create an account, sign in, sign out and change my password
+- As a user I want to be able to see all of my weekly plan
+- As a user I want to be able to see the recipes i have planned for each week
 
 
 #### WIREFRAMES:
-- https://i.imgur.com/jVGhplm.png
-- https://i.imgur.com/ITX55mJ.png
-- https://i.imgur.com/guyRDKx.png
-- https://i.imgur.com/v9Wegan.png
-- https://i.imgur.com/KBiekoC.png
-- https://i.imgur.com/JXLZCky.png
+- https://media.git.generalassemb.ly/user/21076/files/2a728880-c7e8-11e9-9adc-6ce6e9960246
+- https://media.git.generalassemb.ly/user/21076/files/29415b80-c7e8-11e9-9014-a687fe271ae7
+- https://media.git.generalassemb.ly/user/21076/files/247ca780-c7e8-11e9-9752-73ecd4033b97
+- https://media.git.generalassemb.ly/user/21076/files/00b86200-c7e6-11e9-87b5-618089c6cd0f
 
 
 #### PLANNING, PROCESS & PROBLEM SOLVING:
-The team met together to discuss our project and broke it down into the major elements.  We the examined those elements to break them down into small tasks.  We created a Trello tracking board for these small tasks which were coded by color labels according to the major element they applied to.  We decided that our sprints would be every half day so  day one started with sprint planning and a quick stand up and we wrapped at lunchtime with a srpint retrospective where we discussed what worked well and what could be improved about our processes.
+I planned out the project first by coming up with an idea I was excited about. From there, wireframes and user stories took place which made it much easier to implement the next step, backend. Once back-end was set up, I moved to implementing front-end functionality. The final step was styling.
 
-After lunch we did another stand up and our second sprint planning to determie what tickets were still in progress and what was next in the queue to complete in order to achieve MVP.  Any problems encountered were first researched by the developer facing it, and then discussed among the group as an escalation. If we weren't able to solve the issue via quorum, it went to the issue queue.
-
-Problems in process or with the group were otherwise highlighted in the sprints retrospective and addressed by the scrum master.
-
-In future iterations we will make it so the a user can upload an image. Currently the functionality of the button causes the page to freeze, so it was removed until it can be repaired.
+Along the way, there were both front-end and back-end bugs and I utilized the terminal/browser console.logs() a lot in the process of debugging. This helped me easily trace back to the source of the problem. To reduce the amount of bug encounters, I always planned out in my head how I wanted to implement the structure of classes and functions before I began coding.
