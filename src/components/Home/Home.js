@@ -20,9 +20,9 @@ const Home = (props) => {
             <Button href='#recipes'> My Recipes </Button>
             <Button href='#cart'> My Cart </Button>
           </div>
-          <div className='help justify-content-start'>
+          <div className='help d-flex flex-column justify-content-center align-items-center'>
             <h2> Need help? </h2>
-            <Button href='#help'> Instructions </Button>
+            <Button href='#help'> How To Use </Button>
           </div>
         </div>
       </Fragment>

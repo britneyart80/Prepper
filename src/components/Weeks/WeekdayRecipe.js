@@ -80,7 +80,7 @@ class WeekdayRecipe extends Component {
         )
       }
       return (
-        <div className='weekday-recipe'>
+        <div className='weekday-recipe m-2'>
           <h3> {recipe.name} </h3>
           <div onClick={this.toggleDescription}>
             { desc }

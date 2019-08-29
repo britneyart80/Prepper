@@ -101,7 +101,7 @@ class Week extends Component {
       )
       const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
       const orderedDays = [week[0], week[1], week[2], week[3], week[4], week[5], week[6]]
-      let title = (<h1>{week.name}</h1>)
+      let title = (<h1 className='page-header'>{week.name}</h1>)
       if (this.state.editing) {
         title = <EditWeek
           user={this.props.user}

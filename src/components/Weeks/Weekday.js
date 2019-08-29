@@ -116,10 +116,16 @@ class Weekday extends Component {
 
       return (
         <div>
-          <h2> {days[index]} </h2>
-          {weekday.length > 0 ? recipes : noRecipes}
-          {buttonJsx}
-          <Button href={'#weeks/' + this.props.match.params.id}>Return to Weekly Plan</Button>
+          <h2 className='subheader'> {days[index]} </h2>
+          <div className='weekday-body d-flex'>
+            <div className='col-4 weekday-btns d-flex flex-column justify-content-center'>
+              {buttonJsx}
+              <Button href={'#weeks/' + this.props.match.params.id}>Return to Weekly Plan</Button>
+            </div>
+            <div className='weekday-recipes col-8 d-flex justify-content-around'>
+              {weekday.length > 0 ? recipes : noRecipes}
+            </div>
+          </div>
         </div>
       )
     }

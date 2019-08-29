@@ -58,6 +58,10 @@ a {
   margin: 0;
 }
 
+main.container-fluid {
+  padding: 0;
+}
+
 // HOME PAGE
 
 .head-display {
@@ -90,6 +94,7 @@ a {
 // HOME CONTENTS
 
 .home-content {
+  margin: 2rem;
   padding: 2.5rem 1.5rem;
   text-align: center;
 
@@ -119,6 +124,18 @@ a {
   }
 
   .help {
+    background-color: rgba(236, 100, 75, .2);
+    border-radius: 15px;
+
+    .btn {
+      background-color: $basered;
+      max-width: 90%;
+      font-size: 70%;
+      &:hover {
+        background-color: rgba(200, 0, 0, 1);
+      }
+    }
+
     h2 {
       text-align: left;
     }
@@ -137,6 +154,9 @@ a {
   padding: 1.5rem;
   font-family: $basefont;
   text-shadow: 0 0 15px white;
+
+  .welcome-message {
+  }
 }
 
 .footer {
@@ -164,6 +184,13 @@ a {
   border-bottom-right-radius: 15%;
 }
 
+h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 .page-content {
   padding: 1rem;
 
@@ -172,14 +199,19 @@ a {
   }
 }
 
+.subheader {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  font-family: $basefont;
+  color: $basered;
+}
+
 // WEEK STYLES
 
 .week-page {
-  h1 {
-    margin: 1rem;
-    align-self: center;
-    text-align: center;
-  }
 
   .week-content {
     padding: 1rem;
