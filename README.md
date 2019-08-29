@@ -40,10 +40,10 @@ Once you create an account, you have access to meal prepping, recipe making and 
 
 
 #### WIREFRAMES:
-- https://media.git.generalassemb.ly/user/21076/files/2a728880-c7e8-11e9-9adc-6ce6e9960246
-- https://media.git.generalassemb.ly/user/21076/files/29415b80-c7e8-11e9-9014-a687fe271ae7
-- https://media.git.generalassemb.ly/user/21076/files/247ca780-c7e8-11e9-9752-73ecd4033b97
-- https://media.git.generalassemb.ly/user/21076/files/00b86200-c7e6-11e9-87b5-618089c6cd0f
+[Imgur](https://imgur.com/P7ZQ6H9)
+[Imgur](https://imgur.com/CaxxGHp)
+[Imgur](https://imgur.com/8cXVW61)
+[Imgur](https://imgur.com/pUP9F91)
 
 
 #### PLANNING, PROCESS & PROBLEM SOLVING:
