@@ -18,27 +18,25 @@ class Cart extends Component {
   async componentDidMount () {
     try {
       const res = await axios(`${apiUrl}/carts`)
-      const cart = res.data.carts.find(cart => cart.owner === this.props.user._id)
+      const cart = await res.data.carts.find(cart => cart.owner === this.props.user._id)
       const populated = []
       const myHash = {}
-      if (cart) {
-        const promises = cart.ingredients.map(async ingredientId => {
-          const res = await axios(`${apiUrl}/ingredients/${ingredientId}`)
-          populated.push(res.data.ingredient)
-        })
+      const promises = await cart.ingredients.map(async ingredientId => {
+        const res = await axios(`${apiUrl}/ingredients/${ingredientId}`)
+        populated.push(res.data.ingredient)
+      })
 
-        Promise.all(promises)
-          .then(() => {
-            populated.forEach(ingredient => {
-              if (!myHash[ingredient.name]) {
-                myHash[ingredient.name] = { ingredients: [ingredient], unit: ingredient.unit }
-              } else {
-                myHash[ingredient.name].ingredients.push(ingredient)
-              }
-            })
+      Promise.all(promises)
+        .then(() => {
+          populated.forEach(ingredient => {
+            if (!myHash[ingredient.name]) {
+              myHash[ingredient.name] = { ingredients: [ingredient], unit: ingredient.unit }
+            } else {
+              myHash[ingredient.name].ingredients.push(ingredient)
+            }
           })
-          .then(() => this.setState({ hash: myHash, ingredients: populated, cart: cart }))
-      }
+        })
+        .then(() => this.setState({ hash: myHash, ingredients: populated, cart: cart }))
     } catch (error) {
       console.error(error)
     }
@@ -51,7 +49,6 @@ class Cart extends Component {
     const ids = filtered.slice(0).map(ingredient => ingredient._id)
     const newHash = this.state.hash
     delete newHash[deleteKey]
-    console.log(newHash)
     axios({
       method: 'PATCH',
       url: `${apiUrl}/carts/${this.state.cart._id}`,
@@ -72,7 +69,6 @@ class Cart extends Component {
     const { hash, ingredients } = this.state
     if (hash && ingredients.length) {
       const list = Object.keys(hash).map(key => {
-        console.log(key)
         return (
           <Form.Group key={key} controlId="formBasicChecbox">
             <Form.Check

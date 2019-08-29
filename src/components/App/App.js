@@ -72,7 +72,7 @@ class App extends Component {
             message={alert.message}
           />
         ))}
-        <main className="container">
+        <main className='container'>
           <Route exact path='/' render={ Home } />
 
           {/* Auth Routes */}

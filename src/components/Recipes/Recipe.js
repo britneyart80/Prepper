@@ -21,7 +21,6 @@ class Recipe extends Component {
     try {
       const res = await axios(`${apiUrl}/recipes/${this.props.match.params.id}`)
       this.setState({ recipe: res.data.recipe, ingredients: res.data.recipe.ingredients })
-      console.log(res.data.recipe)
     } catch (error) {
       console.error(error)
     }
@@ -57,7 +56,7 @@ class Recipe extends Component {
     data.set('owner', this.props.user._id)
     data.set('recipe', this.state.recipe._id)
     axios({
-      method: 'POST',
+      method: 'POT',
       url: `${apiUrl}/ingredients`,
       headers: {
         'Authorization': `Bearer ${this.props.user.token}`
@@ -73,7 +72,6 @@ class Recipe extends Component {
       }
     })
       .then(res => {
-        console.log(res)
         const updated = this.state.recipe.ingredients
         updated.push(res.data.ingredient)
         this.props.alert({
@@ -82,14 +80,12 @@ class Recipe extends Component {
           variant: 'success'
         })
         this.setState({ adding: false, ingredients: updated })
-        console.log(this.state.recipe)
       })
       .catch(error => {
         console.error(error)
-        this.setState({ email: '', password: '' })
-        alert({
+        this.props.alert({
           heading: 'An Error occured',
-          message: 'Please try again',
+          message: 'Failed to add an ingredient',
           variant: 'danger'
         })
       })
@@ -97,9 +93,7 @@ class Recipe extends Component {
 
   deleteIngredient= (event) => {
     event.preventDefault()
-    console.log(event.target.id)
     const updated = this.state.ingredients.filter(ingredient => ingredient._id !== event.target.id)
-    console.log(updated)
     axios({
       method: 'DELETE',
       url: `${apiUrl}/ingredients/${event.target.id}`,
@@ -131,7 +125,6 @@ class Recipe extends Component {
           </li>
         </React.Fragment>
       ))
-      console.log(recipe.ingredients)
       return (
         <div>
           <h2> {recipe.name} </h2>

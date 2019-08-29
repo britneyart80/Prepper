@@ -1,1 +1,20 @@
 @import '~bootstrap/scss/bootstrap';
+
+* {
+}
+
+.navbar {
+  padding: 15px;
+}
+
+.head-display {
+  background-image: url("images/header-bg.jpg");
+  background-color: red;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  padding: 20px;
+  height: 600px;
+  color: black;
+  text-shadow: 1px 1px white;
+}

@@ -41,7 +41,6 @@ class EditRecipe extends Component {
       }
     })
       .then(res => {
-        console.log(res)
         this.props.alert({
           heading: 'Success!',
           message: 'You edited your recipe!',
@@ -51,10 +50,9 @@ class EditRecipe extends Component {
       .then(this.props.history.push(`/recipes/${this.state.recipe._id}`))
       .catch(error => {
         console.error(error)
-        this.setState({ email: '', password: '' })
-        alert({
+        this.props.alert({
           heading: 'An Error occured',
-          message: 'Please try again',
+          message: 'Failed to edit recipe',
           variant: 'danger'
         })
       })

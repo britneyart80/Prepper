@@ -58,7 +58,6 @@ class Weekday extends Component {
       }
     })
       .then(res => {
-        console.log(res)
         this.props.alert({
           heading: 'Success!',
           message: 'You added a Recipe!',
@@ -68,10 +67,9 @@ class Weekday extends Component {
       })
       .catch(error => {
         console.error(error)
-        this.setState({ email: '', password: '' })
-        alert({
+        this.props.alert({
           heading: 'An Error occured',
-          message: 'Please try again',
+          message: 'Failed to add a recipe',
           variant: 'danger'
         })
       })
@@ -79,7 +77,6 @@ class Weekday extends Component {
 
   onDeleteRecipe = (event) => {
     event.preventDefault()
-    console.log(event.target.id)
     const updated = this.state.weekday.filter(id => id !== event.target.id)
     this.setState({ weekday: updated })
     axios({
@@ -101,7 +98,6 @@ class Weekday extends Component {
     const index = this.props.match.params.index
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
     if (weekday) {
-      console.log(weekday)
       const buttonJsx = (
         <RecipeDropdown
           url={`${apiUrl}/weeks/${this.props.match.params.id}`}

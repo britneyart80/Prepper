@@ -56,7 +56,6 @@ class Week extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    console.log('submitting this!', this.state.week)
     axios({
       method: 'PATCH',
       url: `${apiUrl}/weeks/${this.state.week._id}`,
@@ -70,7 +69,6 @@ class Week extends Component {
       }
     })
       .then(res => {
-        console.log(res)
         this.props.alert({
           heading: 'Success!',
           message: 'You renamed your plan.',
@@ -78,7 +76,14 @@ class Week extends Component {
         })
         this.setState({ editing: false })
       })
-      .catch(console.error)
+      .catch(error => {
+        console.error(error)
+        this.props.alert({
+          heading: 'An Error occured',
+          message: 'Failed to rename plan',
+          variant: 'danger'
+        })
+      })
   }
 
   render () {

@@ -34,7 +34,6 @@ class WeekdayRecipe extends Component {
     event.preventDefault()
     const updated = this.state.cart.ingredients
     updated.push(event.target.dataset.id)
-    console.log(updated)
     axios({
       method: 'PATCH',
       url: `${apiUrl}/carts/${this.state.cart._id}`,
@@ -48,7 +47,6 @@ class WeekdayRecipe extends Component {
       }
     })
       .then(res => {
-        console.log(res)
         this.props.alert({
           heading: 'Success!',
           message: 'You added an ingredient to your shopping list',
@@ -57,19 +55,17 @@ class WeekdayRecipe extends Component {
       })
       .catch(error => {
         console.error(error)
-        this.setState({ email: '', password: '' })
-        alert({
+        this.props.alert({
           heading: 'An Error occured',
-          message: 'Please try again',
+          message: 'Failed to add an ingredient',
           variant: 'danger'
         })
       })
   }
 
   render () {
-    const { recipe, fullDescription, cart } = this.state
+    const { recipe, fullDescription } = this.state
     if (recipe) {
-      console.log(cart)
       let desc = (<h4> {(recipe.description).substring(0, 150) + ' ...'} </h4>)
       if (fullDescription) {
         desc = (
