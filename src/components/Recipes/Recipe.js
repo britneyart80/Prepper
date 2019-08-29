@@ -56,7 +56,7 @@ class Recipe extends Component {
     data.set('owner', this.props.user._id)
     data.set('recipe', this.state.recipe._id)
     axios({
-      method: 'POT',
+      method: 'POST',
       url: `${apiUrl}/ingredients`,
       headers: {
         'Authorization': `Bearer ${this.props.user.token}`
