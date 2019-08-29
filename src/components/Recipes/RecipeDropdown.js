@@ -16,7 +16,8 @@ class RecipeDropdown extends Component {
   async componentDidMount () {
     try {
       const res = await axios(`${apiUrl}/recipes`)
-      return this.setState({ recipes: res.data.recipes })
+      const myRecipes = res.data.recipes.filter(recipe => recipe.owner === this.props.user._id)
+      return this.setState({ recipes: myRecipes })
     } catch (error) {
       console.error(error)
     }

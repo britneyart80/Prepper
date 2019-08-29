@@ -45,7 +45,15 @@ class Weeks extends Component {
         return res
       })
       .then((res) => this.props.history.push(`/weeks/${res.data.week._id}`))
-      .catch(console.error)
+      .catch(error => {
+        console.error(error)
+        this.setState({ email: '', password: '' })
+        alert({
+          heading: 'An Error occured',
+          message: 'Please try again',
+          variant: 'danger'
+        })
+      })
   }
 
   render () {

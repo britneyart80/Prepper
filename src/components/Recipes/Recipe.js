@@ -84,7 +84,15 @@ class Recipe extends Component {
         this.setState({ adding: false, ingredients: updated })
         console.log(this.state.recipe)
       })
-      .catch(console.error)
+      .catch(error => {
+        console.error(error)
+        this.setState({ email: '', password: '' })
+        alert({
+          heading: 'An Error occured',
+          message: 'Please try again',
+          variant: 'danger'
+        })
+      })
   }
 
   deleteIngredient= (event) => {

@@ -23,7 +23,7 @@ const IngredientForm = ({ handleSubmit }) => (
     </Form.Group>
 
     <Form.Group controlId="unit">
-      <Form.Label>Unit</Form.Label>
+      <Form.Label>Unit (singular)</Form.Label>
       <Form.Control
         name="unit"
         type="text"

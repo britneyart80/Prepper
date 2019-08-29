@@ -42,7 +42,15 @@ class CreateRecipe extends Component {
         return res
       })
       .then((res) => this.props.history.push(`/recipes/${res.data.recipe._id}`))
-      .catch(console.error)
+      .catch(error => {
+        console.error(error)
+        this.setState({ email: '', password: '' })
+        alert({
+          heading: 'An Error occured',
+          message: 'Please try again',
+          variant: 'danger'
+        })
+      })
   }
 
   render () {

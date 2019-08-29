@@ -66,7 +66,15 @@ class Weekday extends Component {
         })
         this.setState({ editing: false })
       })
-      .catch(console.error)
+      .catch(error => {
+        console.error(error)
+        this.setState({ email: '', password: '' })
+        alert({
+          heading: 'An Error occured',
+          message: 'Please try again',
+          variant: 'danger'
+        })
+      })
   }
 
   onDeleteRecipe = (event) => {
@@ -98,7 +106,9 @@ class Weekday extends Component {
         <RecipeDropdown
           url={`${apiUrl}/weeks/${this.props.match.params.id}`}
           index={index}
-          addRecipe={this.addRecipe}/>
+          addRecipe={this.addRecipe}
+          user={this.props.user}
+        />
       )
       const recipes = weekday.map(recipeId => (
         <WeekdayRecipe user={this.props.user} key={recipeId} id={recipeId} onDeleteRecipe={this.onDeleteRecipe}/>

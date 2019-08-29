@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
+import Form from 'react-bootstrap/Form'
 import axios from 'axios'
 import apiUrl from './../../apiConfig'
-// import Button from 'react-bootstrap/Button'
-// import IngredientForm from './../Ingredients/IngredientForm'
 
 class Cart extends Component {
   constructor () {
     super()
 
     this.state = {
-      hash: null
+      hash: null,
+      ingredients: null,
+      cart: null
     }
   }
 
@@ -30,27 +31,56 @@ class Cart extends Component {
           .then(() => {
             populated.forEach(ingredient => {
               if (!myHash[ingredient.name]) {
-                myHash[ingredient.name] = { unit: ingredient.unit, total: ingredient.amount }
+                myHash[ingredient.name] = { ingredients: [ingredient], unit: ingredient.unit }
               } else {
-                myHash[ingredient.name] = { unit: myHash[ingredient.name].unit, total: myHash[ingredient.name].total + ingredient.amount }
+                myHash[ingredient.name].ingredients.push(ingredient)
               }
             })
           })
-          .then(() => this.setState({ hash: myHash }))
-          .then(() => console.log(this.state.hash))
+          .then(() => this.setState({ hash: myHash, ingredients: populated, cart: cart }))
       }
     } catch (error) {
       console.error(error)
     }
   }
 
+  deleteAll = (event) => {
+    event.preventDefault()
+    const deleteKey = event.target.dataset.key
+    const filtered = this.state.ingredients.filter(ingredient => ingredient.name !== deleteKey)
+    const ids = filtered.slice(0).map(ingredient => ingredient._id)
+    const newHash = this.state.hash
+    delete newHash[deleteKey]
+    console.log(newHash)
+    axios({
+      method: 'PATCH',
+      url: `${apiUrl}/carts/${this.state.cart._id}`,
+      headers: {
+        'Authorization': `Bearer ${this.props.user.token}`
+      },
+      data: {
+        cart: {
+          ingredients: ids
+        }
+      }
+    })
+      .then(this.setState({ hash: newHash }))
+      .catch(console.error)
+  }
+
   render () {
-    const { hash } = this.state
-    if (hash) {
+    const { hash, ingredients } = this.state
+    if (hash && ingredients.length) {
       const list = Object.keys(hash).map(key => {
         console.log(key)
         return (
-          <li key={key}> {key}, {hash[key].total} {hash[key].total > 1 ? hash[key].unit + 's' : hash[key].unit} </li>
+          <Form.Group key={key} controlId="formBasicChecbox">
+            <Form.Check
+              data-key={key}
+              onClick={this.deleteAll}
+              type="checkbox"
+              label={`${key}, ${hash[key].ingredients.length} ${hash[key].ingredients.length > 1 ? hash[key].unit + 's' : hash[key].unit}`} />
+          </Form.Group>
         )
       })
       return (

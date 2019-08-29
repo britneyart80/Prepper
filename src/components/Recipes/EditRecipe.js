@@ -49,7 +49,15 @@ class EditRecipe extends Component {
         })
       })
       .then(this.props.history.push(`/recipes/${this.state.recipe._id}`))
-      .catch(console.error)
+      .catch(error => {
+        console.error(error)
+        this.setState({ email: '', password: '' })
+        alert({
+          heading: 'An Error occured',
+          message: 'Please try again',
+          variant: 'danger'
+        })
+      })
   }
 
   render () {

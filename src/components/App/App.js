@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Route } from 'react-router-dom'
+import axios from 'axios'
+import apiUrl from './../../apiConfig'
 
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert'
@@ -37,6 +39,21 @@ class App extends Component {
 
   clearUser = () => this.setState({ user: null })
 
+  createCart = (user) => {
+    axios({
+      method: 'POST',
+      url: `${apiUrl}/carts`,
+      headers: {
+        'Authorization': `Bearer ${user.token}`
+      },
+      data: {
+        cart: {
+          owner: user._id
+        }
+      }
+    })
+  }
+
   alert = ({ heading, message, variant }) => {
     this.setState({ alerts: [...this.state.alerts, { heading, message, variant }] })
   }
@@ -60,7 +77,7 @@ class App extends Component {
 
           {/* Auth Routes */}
           <Route exact path='/sign-up' render={() => (
-            <SignUp alert={this.alert} setUser={this.setUser} />
+            <SignUp alert={this.alert} setUser={this.setUser} createCart={this.createCart}/>
           )} />
           <Route exact path='/sign-in' render={() => (
             <SignIn alert={this.alert} setUser={this.setUser} />

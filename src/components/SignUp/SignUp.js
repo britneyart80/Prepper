@@ -25,11 +25,14 @@ class SignUp extends Component {
   onSignUp = event => {
     event.preventDefault()
 
-    const { alert, history, setUser } = this.props
+    const { alert, history, setUser, createCart } = this.props
 
     signUp(this.state)
       .then(() => signIn(this.state))
-      .then(res => setUser(res.data.user))
+      .then(res => {
+        setUser(res.data.user)
+        createCart(res.data.user)
+      })
       .then(() => alert({
         heading: 'Sign Up Success',
         message: messages.signUpSuccess,

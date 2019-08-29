@@ -33,7 +33,7 @@ class WeekdayRecipe extends Component {
   addToCart = (event) => {
     event.preventDefault()
     const updated = this.state.cart.ingredients
-    updated.push(event.target.ingredientid)
+    updated.push(event.target.dataset.id)
     console.log(updated)
     axios({
       method: 'PATCH',
@@ -55,7 +55,15 @@ class WeekdayRecipe extends Component {
           variant: 'success'
         })
       })
-      .catch(console.error)
+      .catch(error => {
+        console.error(error)
+        this.setState({ email: '', password: '' })
+        alert({
+          heading: 'An Error occured',
+          message: 'Please try again',
+          variant: 'danger'
+        })
+      })
   }
 
   render () {
@@ -69,7 +77,7 @@ class WeekdayRecipe extends Component {
             <h4> {recipe.description} </h4>
             { recipe.ingredients.map(ingredient => (
               <li key={ingredient._id}> {`${ingredient.name}, ${ingredient.amount} ${ingredient.amount > 1 ? ingredient.unit + 's' : ingredient.unit}`}
-                <Button onClick={this.addToCart} ingredientid={ingredient._id}> Add to Shopping Cart </Button>
+                <Button onClick={this.addToCart} data-id={ingredient._id}> Add to Shopping Cart </Button>
               </li>
             )) }
           </React.Fragment>
