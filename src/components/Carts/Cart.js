@@ -64,7 +64,7 @@ class Cart extends Component {
         }
       }
     })
-      .then(this.setState({ hash: newHash }))
+      .then(this.setState({ hash: newHash, ingredients: filtered }))
       .catch(console.error)
   }
 
