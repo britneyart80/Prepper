@@ -66,6 +66,9 @@ main.container-fluid {
 
 .head-display {
   background-image: url("images/background-2.jpg");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-color: red;
   background-repeat: no-repeat;
   background-size: cover;
