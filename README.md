@@ -40,10 +40,10 @@ Once you create an account, you have access to meal prepping, recipe making and 
 
 
 #### WIREFRAMES:
-![Wireframe](https://imgur.com/P7ZQ6H9)
-![Wireframe](https://imgur.com/CaxxGHp)
-![Wireframe](https://imgur.com/8cXVW61)
-![ERD](https://imgur.com/pUP9F91)
+![Wireframe](https://i.imgur.com/mh6iEde.png)
+![Wireframe](https://i.imgur.com/drLfk1G.png)
+![Wireframe](https://i.imgur.com/c8uEcq7.png)
+![ERD](https://i.imgur.com/pUP9F91.png)
 
 
 #### PLANNING, PROCESS & PROBLEM SOLVING:
