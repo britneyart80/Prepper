@@ -44,7 +44,6 @@ class Recipe extends Component {
           if (array === this.state.recipe._id) {
             array = []
           }
-          console.log(array)
           const promise = await axios({
             method: 'PATCH',
             url: `${apiUrl}/weeks/${week._id}`,
@@ -78,12 +77,9 @@ class Recipe extends Component {
     const carts = await axios(`${apiUrl}/carts`)
     const cart = await carts.data.carts.find(cart => cart.owner === this.props.user._id)
     const inCart = cart.ingredients
-    console.log('in cart', inCart)
     this.state.ingredients.forEach(ingredientId => {
       inCart.filter(i => ingredientId !== i)
     })
-    console.log('cart', cart)
-    console.log('in cart', inCart)
     const removed = await this.removeFromWeeks()
 
     Promise.all([p1, removed])
