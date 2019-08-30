@@ -31,7 +31,8 @@ class App extends Component {
 
     this.state = {
       user: null,
-      alerts: []
+      alerts: [],
+      cart: null
     }
   }
 
@@ -82,7 +83,7 @@ class App extends Component {
             <SignUp alert={this.alert} setUser={this.setUser} createCart={this.createCart}/>
           )} />
           <Route exact path='/sign-in' render={() => (
-            <SignIn alert={this.alert} setUser={this.setUser} />
+            <SignIn alert={this.alert} setUser={this.setUser}/>
           )} />
           <AuthenticatedRoute user={user} exact path='/sign-out' render={() => (
             <SignOut alert={this.alert} clearUser={this.clearUser} user={user} />
@@ -96,7 +97,7 @@ class App extends Component {
             <Recipes user={user} alert={this.alert}/>
           )}/>
           <AuthenticatedRoute user={user} exact path='/recipes/:id' render={() => (
-            <Recipe user={user} alert={this.alert}/>
+            <Recipe user={user} alert={this.alert} cart={this.cart}/>
           )}/>
           <AuthenticatedRoute user={user} path='/recipes/:id/edit' render={() => (
             <EditRecipe user={user} alert={this.alert}/>

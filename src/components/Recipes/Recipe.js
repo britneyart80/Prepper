@@ -30,9 +30,43 @@ class Recipe extends Component {
     }
   }
 
-  deleteRecipe = () => {
+  removeFromWeeks = async () => {
+    const weeks = await axios(`${apiUrl}/weeks`)
+    const myWeeks = weeks.data.weeks.filter(week => week.owner === this.props.user._id)
+    const promises = []
+    if (myWeeks) {
+      myWeeks.forEach(week => {
+        Object.keys(week).forEach(async key => {
+          let array = week[key]
+          if (Array.isArray(array)) {
+            array = array.filter(recipeId => recipeId !== this.state.recipe._id)
+          }
+          if (array === this.state.recipe._id) {
+            array = []
+          }
+          console.log(array)
+          const promise = await axios({
+            method: 'PATCH',
+            url: `${apiUrl}/weeks/${week._id}`,
+            headers: {
+              'Authorization': `Bearer ${this.props.user.token}`
+            },
+            data: {
+              week: {
+                [key]: array
+              }
+            }
+          })
+          promises.push(promise)
+        })
+      })
+      Promise.all(promises)
+    }
+  }
+
+  deleteRecipe = async () => {
     event.preventDefault()
-    axios.delete(`${apiUrl}/recipes/${this.state.recipe._id}`,
+    const p1 = await axios.delete(`${apiUrl}/recipes/${this.state.recipe._id}`,
       {
         headers: {
           'Authorization': `Bearer ${this.props.user.token}`
@@ -41,6 +75,18 @@ class Recipe extends Component {
           recipe: this.state.recipe
         }
       })
+    const carts = await axios(`${apiUrl}/carts`)
+    const cart = await carts.data.carts.find(cart => cart.owner === this.props.user._id)
+    const inCart = cart.ingredients
+    console.log('in cart', inCart)
+    this.state.ingredients.forEach(ingredientId => {
+      inCart.filter(i => ingredientId !== i)
+    })
+    console.log('cart', cart)
+    console.log('in cart', inCart)
+    const removed = await this.removeFromWeeks()
+
+    Promise.all([p1, removed])
       .then(() => (
         this.props.history.push('/recipes')
       ))

@@ -21,7 +21,7 @@ class SignIn extends Component {
     [event.target.name]: event.target.value
   })
 
-  onSignIn = event => {
+  onSignIn = async event => {
     event.preventDefault()
 
     const { alert, history, setUser } = this.props

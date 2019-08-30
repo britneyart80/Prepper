@@ -75,4 +75,4 @@ I planned out the project first by coming up with an idea I was excited about. F
 
 Along the way, there were both front-end and back-end bugs and I utilized the terminal/browser console.logs() a lot in the process of debugging. This helped me easily trace back to the source of the problem. To reduce the amount of bug encounters, I always planned out in my head how I wanted to implement the structure of classes and functions before I began coding.
 
-For future iterations, I would love to add functionality so that you can delete a certain number of ingredients off the shopping cart instead of having to delete all of them once ticked.
+For future iterations, I would love to add functionality so that you can delete a certain number of ingredients off the shopping cart instead of having to delete all of them once ticked. There is also one bug where, on recipe edit, it does not refresh the page after successful submission.

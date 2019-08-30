@@ -44,6 +44,7 @@ class EditRecipe extends Component {
         recipe: this.state.recipe
       }
     })
+      .then(this.props.history.push(`/recipes/${this.state.recipe._id}`))
       .then(res => {
         this.props.alert({
           heading: 'Success!',
@@ -51,7 +52,6 @@ class EditRecipe extends Component {
           variant: 'success'
         })
       })
-      .then(this.props.history.push(`/recipes/${this.state.recipe._id}`))
       .catch(() => {
         this.props.alert({
           heading: 'An Error occured',
