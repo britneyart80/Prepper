@@ -42,8 +42,7 @@ class CreateRecipe extends Component {
         return res
       })
       .then((res) => this.props.history.push(`/recipes/${res.data.recipe._id}`))
-      .catch(error => {
-        console.error(error)
+      .catch(() => {
         this.props.alert({
           heading: 'An Error occured',
           message: 'Failed to create a recipe',

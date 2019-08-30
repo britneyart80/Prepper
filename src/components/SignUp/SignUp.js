@@ -39,8 +39,7 @@ class SignUp extends Component {
         variant: 'success'
       }))
       .then(() => history.push('/'))
-      .catch(error => {
-        console.error(error)
+      .catch(() => {
         this.setState({ email: '', password: '', passwordConfirmation: '' })
         alert({
           heading: 'Sign Up Failed',

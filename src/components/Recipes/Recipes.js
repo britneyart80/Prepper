@@ -19,7 +19,11 @@ class Recipes extends Component {
       const res = await axios(`${apiUrl}/recipes`)
       return this.setState({ recipes: res.data.recipes })
     } catch (error) {
-      console.error(error)
+      this.props.alert({
+        heading: 'An Error occured',
+        message: 'Please try again later',
+        variant: 'danger'
+      })
     }
   }
 

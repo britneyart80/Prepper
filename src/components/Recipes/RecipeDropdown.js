@@ -19,7 +19,11 @@ class RecipeDropdown extends Component {
       const myRecipes = res.data.recipes.filter(recipe => recipe.owner === this.props.user._id)
       return this.setState({ recipes: myRecipes })
     } catch (error) {
-      console.error(error)
+      this.props.alert({
+        heading: 'An Error occured',
+        message: 'Please try again later',
+        variant: 'danger'
+      })
     }
   }
 

@@ -21,7 +21,11 @@ class Weekday extends Component {
       const res = await axios(`${apiUrl}/weeks/${this.props.match.params.id}`)
       this.setState({ weekday: res.data.week[this.props.match.params.index] })
     } catch (error) {
-      console.error(error)
+      this.props.alert({
+        heading: 'An Error occured',
+        message: 'Please try again later',
+        variant: 'danger'
+      })
     }
   }
 
@@ -65,8 +69,7 @@ class Weekday extends Component {
         })
         this.setState({ editing: false })
       })
-      .catch(error => {
-        console.error(error)
+      .catch(() => {
         this.props.alert({
           heading: 'An Error occured',
           message: 'Failed to add a recipe',
@@ -77,7 +80,10 @@ class Weekday extends Component {
 
   onDeleteRecipe = (event) => {
     event.preventDefault()
-    const updated = this.state.weekday.filter(id => id !== event.target.id)
+    const og = this.state.weekday
+    const index = this.state.weekday.findIndex(id => id === event.target.id)
+    og.splice(index, 1)
+    const updated = og
     this.setState({ weekday: updated })
     axios({
       method: 'PATCH',
@@ -107,7 +113,7 @@ class Weekday extends Component {
         />
       )
       const recipes = weekday.map(recipeId => (
-        <WeekdayRecipe user={this.props.user} key={recipeId} id={recipeId} onDeleteRecipe={this.onDeleteRecipe}/>
+        <WeekdayRecipe user={this.props.user} key={recipeId + Math.random()} id={recipeId} alert={this.props.alert} onDeleteRecipe={this.onDeleteRecipe}/>
       ))
 
       const noRecipes = (
@@ -118,7 +124,7 @@ class Weekday extends Component {
         <div>
           <h2 className='subheader'> {days[index]} </h2>
           <div className='weekday-body d-flex'>
-            <div className='col-4 weekday-btns d-flex flex-column justify-content-center'>
+            <div className='col-3 weekday-btns d-flex flex-column justify-content-center'>
               {buttonJsx}
               <Button href={'#weeks/' + this.props.match.params.id}>Return to Weekly Plan</Button>
             </div>

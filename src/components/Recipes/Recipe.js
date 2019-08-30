@@ -22,7 +22,11 @@ class Recipe extends Component {
       const res = await axios(`${apiUrl}/recipes/${this.props.match.params.id}`)
       this.setState({ recipe: res.data.recipe, ingredients: res.data.recipe.ingredients })
     } catch (error) {
-      console.error(error)
+      this.props.alert({
+        heading: 'An Error occured',
+        message: 'Please try again later',
+        variant: 'danger'
+      })
     }
   }
 
@@ -81,8 +85,7 @@ class Recipe extends Component {
         })
         this.setState({ adding: false, ingredients: updated })
       })
-      .catch(error => {
-        console.error(error)
+      .catch(() => {
         this.props.alert({
           heading: 'An Error occured',
           message: 'Failed to add an ingredient',
@@ -121,7 +124,7 @@ class Recipe extends Component {
       const listItems = ingredients.map(ingredient => (
         <React.Fragment key={ingredient._id}>
           <li> {`${ingredient.name}, ${ingredient.amount} ${ingredient.amount > 1 ? ingredient.unit + 's' : ingredient.unit}`}
-            <Button onClick={this.deleteIngredient} id={ingredient._id}>X</Button>
+            <span className='delete-ingredient' onClick={this.deleteIngredient} id={ingredient._id}>X</span>
           </li>
         </React.Fragment>
       ))

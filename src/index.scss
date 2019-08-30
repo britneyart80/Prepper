@@ -3,7 +3,9 @@
 
 $h1size: 3.7rem;
 $basered: rgba(217, 30, 24, 1);
+$palered: rgba(217, 30, 24, .6);
 $lightred: rgba(236, 100, 75, 1);
+$darkred: rgba(200, 0, 0, 1);
 $lightgrey: rgba(0, 0, 0, .05);
 $subfont: 'Roboto', sans-serif;
 $basefont: 'Signika Negative', sans-serif;
@@ -46,6 +48,8 @@ a {
   width: 150px;
   padding: .6rem;
   margin: .5rem;
+  max-width: 95%;
+  font-size: 90%;
   &:hover {
     background-color: $basered;
     border-color: $lightred;
@@ -101,7 +105,6 @@ main.container-fluid {
 
 .home-content {
   margin: 2rem;
-  padding: 2.5rem 1.5rem;
   text-align: center;
 
   h2 {
@@ -138,7 +141,7 @@ main.container-fluid {
       max-width: 90%;
       font-size: 70%;
       &:hover {
-        background-color: rgba(200, 0, 0, 1);
+        background-color: $darkred;
       }
     }
 
@@ -183,11 +186,9 @@ main.container-fluid {
 .page-header {
   text-align: center;
   color: white;
-  height: 250px;
-  background-color: $lightred;
+  height: 220px;
+  background-color: $basered;
   margin: 0 -15px;
-  border-bottom-left-radius: 15%;
-  border-bottom-right-radius: 15%;
 }
 
 h1 {
@@ -213,6 +214,7 @@ h1 {
   height: 150px;
   font-family: $basefont;
   color: $basered;
+  font-size: 3rem;
 }
 
 // WEEK STYLES
@@ -264,13 +266,33 @@ h1 {
   }
 }
 
-.weekday-recipe {
-  .recipe-description {
-    span {
-      font-size: 1rem;
+.weekday-recipes {
+  flex-wrap: wrap;
+
+  .weekday-recipe {
+    .recipe-description {
+      span {
+        font-size: 1rem;
+      }
+    }
+    .recipe-btn {
+      margin-left: .5rem;
+      font-size: .7rem;
+      max-width: 1.2rem;
+      cursor: pointer;
     }
   }
 }
+
+.delete-ingredient {
+  margin: 0 .4rem;
+  cursor: pointer;
+  background-color: $basered;
+  padding: .3rem;
+  border-radius: 5px;
+  color: white;
+}
+
 
 // FORM STYLES
 

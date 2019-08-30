@@ -15,7 +15,11 @@ class EditRecipe extends Component {
       const res = await axios(`${apiUrl}/recipes/${this.props.match.params.id}`)
       this.setState({ recipe: res.data.recipe })
     } catch (error) {
-      console.error(error)
+      this.props.alert({
+        heading: 'An Error occured',
+        message: 'Please try again later',
+        variant: 'danger'
+      })
     }
   }
 
@@ -48,8 +52,7 @@ class EditRecipe extends Component {
         })
       })
       .then(this.props.history.push(`/recipes/${this.state.recipe._id}`))
-      .catch(error => {
-        console.error(error)
+      .catch(() => {
         this.props.alert({
           heading: 'An Error occured',
           message: 'Failed to edit recipe',

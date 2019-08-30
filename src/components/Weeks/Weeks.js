@@ -21,7 +21,11 @@ class Weeks extends Component {
       const res = await axios(`${apiUrl}/weeks`)
       this.setState({ weeks: res.data.weeks, week: { name: (moment(new Date()).format('YYYY-DD-MM')), owner: this.props.user._id } })
     } catch (error) {
-      console.error(error)
+      this.props.alert({
+        heading: 'An Error occured',
+        message: 'Please try again later',
+        variant: 'danger'
+      })
     }
   }
 
@@ -45,8 +49,7 @@ class Weeks extends Component {
         return res
       })
       .then((res) => this.props.history.push(`/weeks/${res.data.week._id}`))
-      .catch(error => {
-        console.error(error)
+      .catch(() => {
         this.props.alert({
           heading: 'An Error occured',
           message: 'Failed to create a new plan',

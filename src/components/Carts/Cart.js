@@ -37,8 +37,12 @@ class Cart extends Component {
           })
         })
         .then(() => this.setState({ hash: myHash, ingredients: populated, cart: cart }))
-    } catch (error) {
-      console.error(error)
+    } catch (err) {
+      this.props.alert({
+        heading: 'An Error occured',
+        message: 'Please try again later',
+        variant: 'danger'
+      })
     }
   }
 
@@ -62,7 +66,13 @@ class Cart extends Component {
       }
     })
       .then(this.setState({ hash: newHash, ingredients: filtered }))
-      .catch(console.error)
+      .catch(() => {
+        this.props.alert({
+          heading: 'An Error occured',
+          message: 'Please try again later',
+          variant: 'danger'
+        })
+      })
   }
 
   render () {
