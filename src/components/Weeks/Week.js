@@ -21,11 +21,7 @@ class Week extends Component {
       const res = await axios(`${apiUrl}/weeks/${this.props.match.params.id}`)
       this.setState({ week: res.data.week })
     } catch (error) {
-      this.props.alert({
-        heading: 'An Error occured',
-        message: 'Please try again later',
-        variant: 'danger'
-      })
+      console.error(error)
     }
   }
 
@@ -43,6 +39,13 @@ class Week extends Component {
       .then(() => (
         this.props.history.push('/weeks')
       ))
+      .then(() => {
+        this.props.alert({
+          heading: 'Success!',
+          message: 'You deleted your meal plan',
+          variant: 'success'
+        })
+      })
   }
 
   editWeek = () => {
@@ -96,7 +99,7 @@ class Week extends Component {
     if (week) {
       const returnBtn = (<Button href='#weeks'>Return to Plans</Button>)
       const buttonJsx = (
-        <div className='buttonjsx'>
+        <div className='buttonjsx mb-3'>
           <Button onClick={this.editWeek}>Edit Plan Name</Button>
           <Button onClick={this.deleteWeek}>Delete Plan</Button>
           {returnBtn}
@@ -115,6 +118,7 @@ class Week extends Component {
         <div className='week-page'>
           { title }
           <div className='week-content justify-content-space-between align-items-center'>
+            {this.props.user && week && this.props.user._id === week.owner ? buttonJsx : returnBtn}
             <div className='weekdays d-flex'>
               {orderedDays.map((recipes, index) => (
                 <Link key={index} to={`/weeks/${this.state.week._id}/${index}`}>
@@ -125,7 +129,6 @@ class Week extends Component {
                 </Link>
               ))}
             </div>
-            {this.props.user && week && this.props.user._id === week.owner ? buttonJsx : returnBtn}
           </div>
         </div>
       )

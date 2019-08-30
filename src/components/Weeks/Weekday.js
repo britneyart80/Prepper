@@ -45,11 +45,11 @@ class Weekday extends Component {
       ))
   }
 
-  addRecipe = (event) => {
+  addRecipe = async (event) => {
     event.preventDefault()
     const updated = this.state.weekday
     updated.push(event.target.id)
-    axios({
+    await axios({
       method: 'PATCH',
       url: `${apiUrl}/weeks/${this.props.match.params.id}`,
       headers: {
