@@ -63,6 +63,25 @@ class Recipe extends Component {
     }
   }
 
+  removeFromCart = async (cart) => {
+    let updated
+    this.state.ingredients.forEach(ingredientId => {
+      updated = cart.ingredients.filter(i => i === ingredientId)
+    })
+    axios({
+      method: 'PATCH',
+      url: `${apiUrl}/carts/${cart._id}`,
+      headers: {
+        'Authorization': `Bearer ${this.props.user.token}`
+      },
+      data: {
+        cart: {
+          ingredients: updated
+        }
+      }
+    })
+  }
+
   deleteRecipe = async () => {
     event.preventDefault()
     const p1 = await axios.delete(`${apiUrl}/recipes/${this.state.recipe._id}`,
@@ -81,8 +100,9 @@ class Recipe extends Component {
       inCart.filter(i => ingredientId !== i)
     })
     const removed = await this.removeFromWeeks()
+    const removedFromCart = await this.removeFromCart(cart)
 
-    Promise.all([p1, removed])
+    Promise.all([p1, removed, removedFromCart])
       .then(() => (
         this.props.history.push('/recipes')
       ))

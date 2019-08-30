@@ -95,10 +95,6 @@ main.container-fluid {
       color: $lightred;
     }
   }
-
-  @media (max-width: 767px) {
-    background-attachment: initial;
-  }
 }
 
 // HOME CONTENTS
