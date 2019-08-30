@@ -38,6 +38,10 @@ Once you create an account, you have access to meal prepping, recipe making and 
 - As a user I want to be able to see all of my weekly plan
 - As a user I want to be able to see the recipes i have planned for each week
 
+### SCREENSHOT OF APP
+
+![App](https://i.imgur.com/M5HAs1z.png)
+![App](https://i.imgur.com/jKUF53C.png)
 
 #### WIREFRAMES:
 ![Wireframe](https://i.imgur.com/mh6iEde.png)
@@ -45,6 +49,21 @@ Once you create an account, you have access to meal prepping, recipe making and 
 ![Wireframe](https://i.imgur.com/c8uEcq7.png)
 ![ERD](https://i.imgur.com/pUP9F91.png)
 
+#### Catalog of Routes:
+| HTTP Verb  |  Paths |
+|---|---|
+| POST  | /sign-up  |
+|  POST | /sign-in |
+| PATCH   | /change-password |
+|  DELETE | /sign-out  |
+| GET  | /weeks |
+| GET  |  /weeks/:id  |
+| GET | /weeks/:id/:index  |
+| GET  | /recipes |
+| GET  | /recipes/:id  |
+| PATCH  | /recipes/:id/edit  |
+| POST  | /create-recipe  |
+| GET  | /cart  |
 
 #### PLANNING, PROCESS & PROBLEM SOLVING:
 I planned out the project first by coming up with an idea I was excited about. From there, wireframes and user stories took place which made it much easier to implement the next step, backend. Once back-end was set up, I moved to implementing front-end functionality. The final step was styling.
