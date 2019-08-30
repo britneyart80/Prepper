@@ -21,7 +21,11 @@ class Week extends Component {
       const res = await axios(`${apiUrl}/weeks/${this.props.match.params.id}`)
       this.setState({ week: res.data.week })
     } catch (error) {
-      console.error(error)
+      this.props.alert({
+        heading: 'An Error occured',
+        message: 'Please try again later',
+        variant: 'danger'
+      })
     }
   }
 
